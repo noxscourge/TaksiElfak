@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Skripta za nasu bazu podataka cassandra
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CREATE KEYSPACE taksisti WITH REPLICATION = {'class': 'SimpleStrategy' , 'replication_factor' : 3};
 
-## Available Scripts
+CREATE TABLE vozaci(id uuid, status text, trenutna_lokacija text, cena text, ime text, kompanija text, prezime text, PRIMARY KEY(id));
 
-In the project directory, you can run:
+INSERT INTO vozaci(id, status, trenutna_lokacija,cena,ime,kompanija,prezime) VALUES (now(), 'dostupan', 'Bulevar' , '300', 'David' , 'Azdejkovic', 'Bros taksi');
+INSERT INTO vozaci(id, status, trenutna_lokacija,cena,ime,kompanija,prezime) VALUES (now(), 'nedostupan', 'Bulevar' , '350', 'Igor' , 'Jovanovic', 'Pink taksi');
+INSERT INTO vozaci(id, status, trenutna_lokacija,cena,ime,kompanija,prezime) VALUES (now(), 'dostupan', 'Bulevar' , '360', 'Tijana' , 'Stankovic', 'Bros taksi');
+INSERT INTO vozaci(id, status, trenutna_lokacija,cena,ime,kompanija,prezime) VALUES (now(), 'dostupan', 'Bulevar' , '360', 'Bojana' , 'Svilenkovic', 'Eko taksi');
 
-### `npm start`
+-------------------------------------------------------------------------------------------------------------------------
+//napomena, da bi sve funkcionisalo ispravno potrebno je zaista uneti pravi ID koji generise now() u tabelici vozaci
+//savetujem da je bolje praviti putem create opcije kako bi sve islo kako treba (u aplikaciji samoj), jer u datom primeru skripte koristicu 1 isti kljuc
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+CREATE KEYSPACE zakazivanje_voznje WITH REPLICATION = {'class': 'SimpleStrategy' , 'replication_factor' : 3};
 
-### `npm run build`
+CREATE TABLE voznja(id uuid, email text, od text, do text, vozac_ime text, vozac_prezime text, vozac_kompanija text, cena text, broj_telefona text, vozac_id uuid, PRIMARY KEY(id));
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+INSERT INTO voznja(id,email,od,do,vozac_ime,vozac_prezime,vozac_kompanija,cena,broj_telefona, vozac_id) VALUES (now(),'david@elfak.rs','7.juli','Bulevar Nemanjica','random','randomPrezime','Bros taksi','300','060666161', '15a183f0-8742-11eb-a69e-4bf9b114ec66');
+INSERT INTO voznja(id,email,od,do,vozac_ime,vozac_prezime,vozac_kompanija,cena,broj_telefona, vozac_id) VALUES (now(),'igor@elfak.rs','8.juli','Bulevar Nemanjica','random','randomPrezime','Pink taksi','350','060666161', '15a183f0-8742-11eb-a69e-4bf9b114ec66');
+INSERT INTO voznja(id,email,od,do,vozac_ime,vozac_prezime,vozac_kompanija,cena,broj_telefona, vozac_id) VALUES (now(),'tijana@elfak.rs','9.juli','Bulevar Nemanjica','random','randomPrezime','Bros taksi','360','060666161', '15a183f0-8742-11eb-a69e-4bf9b114ec66');
+INSERT INTO voznja(id,email,od,do,vozac_ime,vozac_prezime,vozac_kompanija,cena,broj_telefona, vozac_id) VALUES (now(),'bojana@elfak.rs','10.juli','Bulevar Nemanjica','random','randomPrezime','Eko taksi','360','060666161', '15a183f0-8742-11eb-a69e-4bf9b114ec66');
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Kako pokrenuti aplikaciju?
 
-### `npm run eject`
+Postavi se root u \taksiapp i zatim se kuca komanda: npm run dev (kojom se pokrece istovremeno i backend i frontend)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
