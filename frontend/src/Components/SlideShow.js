@@ -1,5 +1,4 @@
 import React from 'react'
-import {Container,Col,Row,Card,Form} from 'react-bootstrap'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
