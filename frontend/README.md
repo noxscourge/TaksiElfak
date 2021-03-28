@@ -1,13 +1,12 @@
 # Skripta za nasu bazu podataka cassandra
 
 CREATE KEYSPACE taksisti WITH REPLICATION = {'class': 'SimpleStrategy' , 'replication_factor' : 3};
-<<<<<<< HEAD
+
 
 USE takstisti
 
 =======
-USE takstisti
->>>>>>> d368e6c92baa52123f3ee4face8ab90967f07096
+
 CREATE TABLE vozaci(id uuid, status text, trenutna_lokacija text, cena text, ime text, kompanija text, prezime text, PRIMARY KEY(id));
 
 
@@ -25,13 +24,9 @@ INSERT INTO vozaci(id, status, trenutna_lokacija,cena,ime,kompanija,prezime) VAL
 
 
 CREATE KEYSPACE zakazivanje_voznje WITH REPLICATION = {'class': 'SimpleStrategy' , 'replication_factor' : 3};
-<<<<<<< HEAD
 
 USE zakazivanje_voznje
 
-=======
-USE zakazivanje_voznje
->>>>>>> d368e6c92baa52123f3ee4face8ab90967f07096
 CREATE TABLE voznja(id uuid, email text, od text, do text, vozac_ime text, vozac_prezime text, vozac_kompanija text, cena text, broj_telefona text, vozac_id uuid, PRIMARY KEY(id));
 
 
